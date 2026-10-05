@@ -1,0 +1,114 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Perfil de usuário e papel corporativo",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "nome": { "type": "string" },
+        "email": { "type": "string" },
+        "empresa_id": { "type": "string" },
+        "perfil": { "type": "string", "enum": ["funcionario", "gestor", "financeiro", "admin"] },
+        "cargo": { "type": "string" },
+        "avatarUrl": { "type": "string" }
+      },
+      "required": ["uid", "nome", "email", "empresa_id", "perfil"]
+    },
+    "Viagem": {
+      "title": "Viagem",
+      "description": "Viagem ou projeto para agrupamento de despesas corporativas",
+      "type": "object",
+      "properties": {
+        "usuario_id": { "type": "string" },
+        "usuario_nome": { "type": "string" },
+        "cliente": { "type": "string" },
+        "projeto": { "type": "string" },
+        "data_inicio": { "type": "string" },
+        "data_fim": { "type": "string" },
+        "status": { "type": "string", "enum": ["em_andamento", "enviada", "aprovada", "rejeitada"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["usuario_id", "cliente", "projeto", "data_inicio", "data_fim", "status"]
+    },
+    "Despesa": {
+      "title": "Despesa",
+      "description": "Comprovante fiscal e prestação de contas com hash WORM probatório",
+      "type": "object",
+      "properties": {
+        "viagem_id": { "type": "string" },
+        "usuario_id": { "type": "string" },
+        "usuario_nome": { "type": "string" },
+        "data": { "type": "string" },
+        "hora": { "type": "string" },
+        "cnpj": { "type": "string" },
+        "empresa": { "type": "string" },
+        "categoria": { "type": "string" },
+        "valor": { "type": "number" },
+        "status_aprovacao": { "type": "string", "enum": ["pendente", "aprovado", "rejeitado"] },
+        "comprovante_url": { "type": "string" },
+        "hash": { "type": "string" },
+        "compliance": { "type": "string", "enum": ["essencial", "condicional", "vetada"] },
+        "red_flags": { "type": "array" },
+        "itens": { "type": "array" },
+        "pagamento": { "type": "string" },
+        "chave_nfce": { "type": "string" },
+        "protocolo_sefaz": { "type": "string" },
+        "sefaz_url": { "type": "string" },
+        "confidence_score": { "type": "number" },
+        "localizacao": { "type": "string" },
+        "justificativa_rejeicao": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["usuario_id", "empresa", "categoria", "valor", "status_aprovacao", "hash"]
+    },
+    "AuditoriaLog": {
+      "title": "AuditoriaLog",
+      "description": "Registro imutável de log de auditoria",
+      "type": "object",
+      "properties": {
+        "usuario": { "type": "string" },
+        "usuario_id": { "type": "string" },
+        "acao": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "origem": { "type": "string" },
+        "despesa_id": { "type": "string" },
+        "detalhes": { "type": "string" }
+      },
+      "required": ["usuario", "usuario_id", "acao", "timestamp"]
+    },
+    "AdminConfig": {
+      "title": "AdminConfig",
+      "description": "Configurações de planos e simulador",
+      "type": "object",
+      "properties": {
+        "plans": { "type": "array" },
+        "simulator": { "type": "object" },
+        "analytics": { "type": "object" },
+        "updatedAt": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Documento de perfil do usuário"
+    },
+    "/viagens/{viagemId}": {
+      "schema": { "$ref": "#/entities/Viagem" },
+      "description": "Coleção de viagens corporativas"
+    },
+    "/despesas/{despesaId}": {
+      "schema": { "$ref": "#/entities/Despesa" },
+      "description": "Coleção de despesas fiscais probatórias"
+    },
+    "/auditoria/{logId}": {
+      "schema": { "$ref": "#/entities/AuditoriaLog" },
+      "description": "Trilha de auditoria WORM"
+    },
+    "/configuracoes/{configId}": {
+      "schema": { "$ref": "#/entities/AdminConfig" },
+      "description": "Configurações do sistema"
+    }
+  }
+}

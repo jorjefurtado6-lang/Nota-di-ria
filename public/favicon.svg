@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="1024" height="1024">
+  <defs>
+    <clipPath id="sq"><rect width="100" height="100" rx="27"/></clipPath>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <g clip-path="url(#sq)">
+    <rect width="100" height="100" fill="#16324F"/>
+    <path d="M26 22 h48 v50 l-4.8 5 -4.8-5 -4.8 5 -4.8-5 -4.8 5 -4.8-5 -4.8 5 -4.8-5 -4.8 5 -4.8-5 z" fill="#FAF8F2"/>
+    <path d="M34 60 V34 l12 18 V34" fill="none" stroke="#16324F" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M54 34 v26 M54 34 h5 a13 13 0 0 1 0 26 h-5" fill="none" stroke="#16324F" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M56 47 l5 5 12 -14" fill="none" stroke="#35E08C" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+  </g>
+</svg>

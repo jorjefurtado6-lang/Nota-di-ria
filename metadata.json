@@ -1,0 +1,10 @@
+{
+  "name": "Remix Copy of NotaDiária",
+  "description": "Prestação de contas corporativa inteligente sem digitação. Captura de comprovantes com IA, viagens, gestão de despesas, aprovação de gestor, suporte offline e conformidade.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
